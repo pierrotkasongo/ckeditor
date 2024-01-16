@@ -1,0 +1,40 @@
+{% extends 'script.html' %}
+{% load static %}
+{% block main %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" integrity="sha512-Vj6gPCk8EZlqnoveEyuGyYaWZ1+jyjMPg8g4shwyyNlRQl6d3L9At02ZHQr5K6s5duZl/+YKMnM3/8pDhoUphg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Ckeditor</title>
+    <script>hijs.highlightAll()</script>
+</head>
+<body>
+    <div class="container mt-2">
+        <div class="col-md-12 ms-sm-auto col-lg-12">
+            <div class="row">
+                <form method="post">
+                    <div class="blog-form">
+                        {% csrf_token %}
+                        {{form.media}}
+                        {{form.as_p}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+            <div class="row d-flex justify-content-center">
+                {% for item  in data %}
+                    <div class="card mx-1 mt-1" style="width: 18rem;">
+                        <p class="text-center">{{item.uuid}}</p>
+                        <h5 class="text-center">{{item.name}}</h5>
+                        <p class="text-center">{{item.body|safe}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> 
+</body>
+</html>
+{% endblock main %}
